@@ -1,5 +1,6 @@
 package com.grapeup.pekarsky.customerservice.web;
 
+import com.grapeup.pekarsky.customerservice.jpa.CustomerRepository;
 import com.grapeup.pekarsky.model.Customer;
 import com.grapeup.pekarsky.model.Order;
 import com.netflix.appinfo.InstanceInfo;
@@ -13,11 +14,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/customers")
@@ -30,15 +33,12 @@ public class CustomerController {
     @Autowired
     private RestTemplateBuilder builder;
 
-
-    private Map<Long, Customer> customers = Map.of(
-            1L, new Customer(1L, "Marcin", "Dorywalski", null),
-            2L, new Customer(2L, "Sergii", "Pekarskyi", null)
-    );
+    @Autowired
+    private CustomerRepository customerRepository;
 
     @GetMapping("/{id}")
     public Customer getCustomer(@PathVariable Long id) {
-        Customer customer = customers.get(id);
+        Customer customer = customerRepository.findById(id).orElseThrow(NoSuchElementException::new);
         customer.setOrders(getOrders(id));
         return customer;
     }
