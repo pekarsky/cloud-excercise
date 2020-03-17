@@ -11,7 +11,7 @@
 	<groupId>com.grapeup.pekarsky</groupId>
 	<artifactId>order-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>order-service</name>
+	<name>order-service</name>CustomerServiceApplicationTests
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
