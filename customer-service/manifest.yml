@@ -1,0 +1,16 @@
+applications:
+- name: customer-service
+  disk_quota: 1G
+  path: target\customer-service-0.0.1-SNAPSHOT.jar
+  instances: 1
+  memory: 1G
+  routes:
+  - route: customer-service-chipper-cat-il.cfapps.io
+  services:
+  - mongo-dev
+  stack: cflinuxfs3
+  buildpacks:
+  - java_buildpack
+  env:
+    JBP_CONFIG_DEBUG: '{enabled: false}'
+
