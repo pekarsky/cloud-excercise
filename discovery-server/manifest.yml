@@ -9,3 +9,5 @@ applications:
   routes:
   - route: discovery-server-daring-hyrax-kj.cfapps.io
   stack: cflinuxfs3
+  env:
+    JBP_CONFIG_DEBUG: '{enabled: false}'
