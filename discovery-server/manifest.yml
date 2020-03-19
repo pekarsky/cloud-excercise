@@ -1,0 +1,13 @@
+applications:
+- name: discovery-server
+  path: target\discovery-server-0.0.1-SNAPSHOT.jar
+  disk_quota: 1G
+  instances: 1
+  memory: 1G
+  buildpacks:
+  - java_buildpack
+  routes:
+  - route: discovery-server-daring-hyrax-kj.cfapps.io
+  stack: cflinuxfs3
+  env:
+    JBP_CONFIG_DEBUG: '{enabled: false}'
